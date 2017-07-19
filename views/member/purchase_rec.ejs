@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>Elife</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/stylesheets/member/purchase_rec.css">
+</head>
+
+<body>
+    <% if(member) { %>
+        <div class="navbar-header">
+            <div class="navbar-brand pull-right">
+                <img src="/images/logo.png" alt="Brand Image">
+            </div>
+            <div id="mySidenav" class="sidenav sidenav-hover">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                <br>
+                <h3>&nbsp;&nbsp;&nbsp;&nbsp;<%= member.name %>, 您好!</h3>
+                <a href="/home"><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp;&nbsp;首頁</a>
+                <a href="/shopping_cart"><span class="glyphicon glyphicon-shopping-cart"></span>&nbsp;&nbsp;&nbsp;購物車</a>
+                <a href="/purchase_rec"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;&nbsp;&nbsp;購買紀錄</a>
+                <a href="/personal_info"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;&nbsp;個人資料</a>
+                <form action="/register/logout" method="POST">
+                    <a><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;<input id="logout" type="submit" value="登出"></a>
+                </form>
+            </div>
+            <div id="main">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="font-size:30px;cursor:pointer;color:white;" onclick="openNav()"></span>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="row content">
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10 text-middle">
+                    <h1>購買紀錄</h1>
+                    <hr>
+                    <% if(dateList) { %>
+                        <% dateList.forEach(function(list) { %>
+                            <a href="/purchase_rec/<%= list.date %>/<%= list.time %>">
+                                <button type="button" class="btn btn-success btn-lg btn-block" id="record">
+                                    <%= list.date + " " + list.time %>
+                                </button>
+                            </a>
+                            <br>
+                            <% }); %>
+                                <% } else { %>
+                                    <h3 class="text-center">目前無購物紀錄</h3>
+                                    <% } %>
+                </div>
+                <div class="col-sm-1"></div>
+            </div>
+            <% } %>
+                <script>
+                function openNav() {
+                    document.getElementById("mySidenav").style.width = "250px";
+                }
+
+                function closeNav() {
+                    document.getElementById("mySidenav").style.width = "0";
+                }
+                </script>
+</body>
+
+</html>

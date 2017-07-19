@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>Elife</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/stylesheets/third/third_detail.css">
+</head>
+
+<body>
+    <div class="navbar-header">
+        <div class="navbar-brand pull-right">
+            <img src="/images/logo.png" alt="Brand Image">
+        </div>
+        <div id="main">
+            <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true" style="font-size:30px;color:#6F916F;"></span>
+        </span>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row content">
+            <div class="col-sm-1"></div>
+            <div class="col-sm-10 text-center">
+                <h1>接單明細</h1>
+                <h3><%= date %> <%= time %></h3>
+                <br>
+                <form action="/third_order" method="POST">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>店名/品項</th>
+                                <th>單價</th>
+                                <th>數量</th>
+                                <th>小計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% buyList.forEach(function(buy) { %>
+                                <input type="hidden" name="buyId" value="<%= buy.id %>">
+                                <tr>
+                                    <td>
+                                        <%=buy.supplier.storeName %>
+                                            <br>
+                                            <%=buy.name %>
+                                    </td>
+                                    <td>
+                                        <%=buy.price %>
+                                    </td>
+                                    <td>
+                                        <%=buy.quantity %>
+                                    </td>
+                                    <td>
+                                        <%= buy.total %>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                                    <tr style="color:red">
+                                        <td><strong>總金額(元):</strong></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><strong><%= sum %></strong></td>
+                                    </tr>
+                        </tbody>
+                    </table>
+                    <table class="table text-left" style="font-size: 20px">
+                        <tbody>
+                            <tr>
+                                <td> <span class="glyphicon glyphicon-user" aria-hidden="true" style="color: #649965"></span></td>
+                                <td>
+                                    <%=member.name %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td> <span class="glyphicon glyphicon-earphone" aria-hidden="true" style="color: #649965"></span></td>
+                                <td>
+                                    <%=member.phonenum %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><span class="glyphicon glyphicon-home" aria-hidden="true" style="color: #649965"></span></td>
+                                <td>
+                                    <%=member.city %>
+                                        <%=member.hometown %>
+                                            <%=member.address%>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="col-sm-1"></div>
+                    <div class="text-center col-md-12">
+                        <button type="submit" class="btn btn-success btn-lg" id="pick">我要接單</button>
+                    </div>
+                </form>
+                <div class="col-md-12">
+                    <a href="/third_order">
+                        <button type="button" class="btn btn-success btn-lg" id="return">返回</button>
+                    </a>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
