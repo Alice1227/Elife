@@ -42,8 +42,6 @@ Product.getAll = function(supplierId, cb) {
         });
 };
 
-Product.getAll();
-
 Product.search = function(supplierId, name, cb) {
     db.select()
         .from("product")
